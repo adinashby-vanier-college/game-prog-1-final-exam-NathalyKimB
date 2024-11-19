@@ -8,6 +8,9 @@ import greenfoot.*;
  */
 public class MyWorld extends World
 {
+    /* calculating the during of time steps, part 1*/
+    private long lastFrameTimeMS;
+    private double timeStepDuration;
 
     /**
      * Constructor for objects of class MyWorld.
@@ -16,11 +19,13 @@ public class MyWorld extends World
     {
         super(800, 600, 1);
         prepare();
+        /* calculating the during of time steps, part 2*/
+        lastFrameTimeMS = System.currentTimeMillis();
+        timeStepDuration = 1.0 / 60;
     }
 
     /**
-     * Prepare the world for the start of the program.
-     * That is: create the initial objects and add them to the world.
+     * Prepare the world for the start of the program. That is: create the initial objects and add them to the world.
      */
     private void prepare()
     {
@@ -82,5 +87,22 @@ public class MyWorld extends World
         cannonBall6.setLocation(616, 177);
         cannonBall.setLocation(220, 103);
         cannonBall2.setLocation(338, 94);
+    }
+
+    /**
+     * calculating the during of time steps, part 3
+     */
+    public void act()
+    {
+        timeStepDuration = (System.currentTimeMillis() - lastFrameTimeMS) / 1000.0;
+        lastFrameTimeMS = System.currentTimeMillis();
+    }
+
+    /**
+     * calculating the during of time steps, part 4
+     */
+    public double getTimeStepDuration()
+    {
+        return timeStepDuration;
     }
 }
