@@ -6,11 +6,7 @@
         <import target="greenfoot.*" enable="true"/>
     </imports>
     <implements/>
-    <fields>
-        <comment xml:space="preserve">calculating the during of time steps, part 1</comment>
-        <variable access="private" type="long" type-java="long" name="lastFrameTimeMS" enable="true"/>
-        <variable access="private" type="double" type-java="double" name="timeStepDuration" enable="true"/>
-    </fields>
+    <fields/>
     <constructors>
         <constructor access="public" enable="true">
             <javadoc xml:space="preserve">Constructor for objects of class MyWorld.</javadoc>
@@ -19,15 +15,13 @@
             <delegate target="super" params="800,600,1" params-java="800, 600, 1"/>
             <body>
                 <call expression="prepare()" expression-java="prepare()" enable="true"/>
-                <comment xml:space="preserve">calculating the during of time steps, part 2</comment>
-                <assign dest="lastFrameTimeMS" dest-java="lastFrameTimeMS" src="System.currentTimeMillis()" src-java="System.currentTimeMillis()" enable="true"/>
-                <assign dest="timeStepDuration" dest-java="timeStepDuration" src="1.0/60" src-java="1.0 / 60" enable="true"/>
             </body>
         </constructor>
     </constructors>
     <methods>
         <method access="private" type="void" type-java="void" name="prepare" enable="true">
-            <javadoc xml:space="preserve">Prepare the world for the start of the program. That is: create the initial objects and add them to the world.</javadoc>
+            <javadoc xml:space="preserve">Prepare the world for the start of the program.
+That is: create the initial objects and add them to the world.</javadoc>
             <params/>
             <throws/>
             <body>
@@ -89,23 +83,6 @@
                 <call expression="cannonBall6.setLocation(616,177)" expression-java="cannonBall6.setLocation(616, 177)" enable="true"/>
                 <call expression="cannonBall.setLocation(220,103)" expression-java="cannonBall.setLocation(220, 103)" enable="true"/>
                 <call expression="cannonBall2.setLocation(338,94)" expression-java="cannonBall2.setLocation(338, 94)" enable="true"/>
-            </body>
-        </method>
-        <method access="public" type="void" type-java="void" name="act" enable="true">
-            <javadoc xml:space="preserve">calculating the during of time steps, part 3</javadoc>
-            <params/>
-            <throws/>
-            <body>
-                <assign dest="timeStepDuration" dest-java="timeStepDuration" src="(System.currentTimeMillis()-lastFrameTimeMS)/1000.0" src-java="(System.currentTimeMillis() - lastFrameTimeMS) / 1000.0" enable="true"/>
-                <assign dest="lastFrameTimeMS" dest-java="lastFrameTimeMS" src="System.currentTimeMillis()" src-java="System.currentTimeMillis()" enable="true"/>
-            </body>
-        </method>
-        <method access="public" type="double" type-java="double" name="getTimeStepDuration" enable="true">
-            <javadoc xml:space="preserve">calculating the during of time steps, part 4</javadoc>
-            <params/>
-            <throws/>
-            <body>
-                <return value="timeStepDuration" value-java="timeStepDuration" enable="true"/>
             </body>
         </method>
     </methods>

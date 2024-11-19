@@ -13,7 +13,85 @@
             <javadoc xml:space="preserve">Act - do whatever the Hero wants to do. This method is called whenever the 'Act' or 'Run' button gets pressed in the environment.</javadoc>
             <params/>
             <throws/>
-            <body/>
+            <body>
+                <comment xml:space="preserve">//to have the ladybug move</comment>
+                <if condition="Greenfoot.isKeyDown(&quot;left&quot;)" condition-java="Greenfoot.isKeyDown(&quot;left&quot;)" enable="true">
+                    <ifStatements>
+                        <call expression="move(3)" expression-java="move(3)" enable="true"/>
+                    </ifStatements>
+                </if>
+                <if condition="Greenfoot.isKeyDown(&quot;right&quot;)" condition-java="Greenfoot.isKeyDown(&quot;right&quot;)" enable="true">
+                    <ifStatements>
+                        <call expression="move(-3)" expression-java="move(-3)" enable="true"/>
+                    </ifStatements>
+                </if>
+                <if condition="Greenfoot.isKeyDown(&quot;down&quot;)" condition-java="Greenfoot.isKeyDown(&quot;down&quot;)" enable="true">
+                    <ifStatements>
+                        <call expression="turn(-3)" expression-java="turn(-3)" enable="true"/>
+                    </ifStatements>
+                </if>
+                <if condition="Greenfoot.isKeyDown(&quot;up&quot;)" condition-java="Greenfoot.isKeyDown(&quot;up&quot;)" enable="true">
+                    <ifStatements>
+                        <call expression="turn(3)" expression-java="turn(3)" enable="true"/>
+                    </ifStatements>
+                </if>
+                <comment xml:space="preserve">//to transition to GameWon world  when  the ladybug touches the finish location</comment>
+                <if condition="isGameWon()" condition-java="isGameWon()" enable="true">
+                    <ifStatements>
+                        <call expression="transitionToGameWon()" expression-java="transitionToGameWon()" enable="true"/>
+                        <call expression="Greenfoot.playSound(&quot;win.wav&quot;)" expression-java="Greenfoot.playSound(&quot;win.wav&quot;)" enable="true"/>
+                    </ifStatements>
+                </if>
+                <call expression="collision()" expression-java="collision()" enable="true"/>
+            </body>
+        </method>
+        <method access="public" type="boolean" type-java="boolean" name="foundFinishLocation" enable="true">
+            <javadoc xml:space="preserve">to see if  the ladybug is touching the FinishLocation</javadoc>
+            <params/>
+            <throws/>
+            <body>
+                <variable type="Actor" type-java="Actor" name="FinishLocation" value="getOneObjectAtOffset(0,0,FinishLocation.class)" value-java="getOneObjectAtOffset(0, 0, FinishLocation.class)" enable="true"/>
+                <return value="FinishLocation!=null" value-java="FinishLocation != null" enable="true"/>
+            </body>
+        </method>
+        <method access="public" type="void" type-java="void" name="collision" enable="true">
+            <javadoc xml:space="preserve">if the lady bug is touching FinishLocation, it will remove FinishLocation</javadoc>
+            <params/>
+            <throws/>
+            <body>
+                <variable type="Actor" type-java="Actor" name="FinishLocation" value="getOneIntersectingObject(FinishLocation.class)" value-java="getOneIntersectingObject(FinishLocation.class)" enable="true"/>
+                <if condition="FinishLocation!=null" condition-java="FinishLocation != null" enable="true">
+                    <ifStatements>
+                        <variable type="World" type-java="World" name="world" value="getWorld()" value-java="getWorld()" enable="true"/>
+                        <call expression="world.removeObject(FinishLocation)" expression-java="world.removeObject(FinishLocation)" enable="true"/>
+                    </ifStatements>
+                </if>
+            </body>
+        </method>
+        <method access="public" type="boolean" type-java="boolean" name="isGameWon" enable="true">
+            <javadoc xml:space="preserve">it is checking if if the lady bug is touching FinishLocation, if it is then the player won</javadoc>
+            <params/>
+            <throws/>
+            <body>
+                <variable type="World" type-java="World" name="world" value="getWorld()" value-java="getWorld()" enable="true"/>
+                <if condition="world.getObjects(FinishLocation.class).isEmpty()" condition-java="world.getObjects(FinishLocation.class).isEmpty()" enable="true">
+                    <ifStatements>
+                        <return value="true" value-java="true" enable="true"/>
+                    </ifStatements>
+                    <else>
+                        <return value="false" value-java="false" enable="true"/>
+                    </else>
+                </if>
+            </body>
+        </method>
+        <method access="public" type="void" type-java="void" name="transitionToGameWon" enable="true">
+            <javadoc xml:space="preserve">if the lady bug is touching FinishLocation, it will remove FinishLocationso the player won, then the player is brought to GameWon world</javadoc>
+            <params/>
+            <throws/>
+            <body>
+                <variable type="World" type-java="World" name="GameWon" value="new GameWon()" value-java=" new GameWon()" enable="true"/>
+                <call expression="Greenfoot.setWorld(GameWon)" expression-java="Greenfoot.setWorld(GameWon)" enable="true"/>
+            </body>
         </method>
     </methods>
 </class>
